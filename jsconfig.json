@@ -1,0 +1,64 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "allowJs": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "/*": [
+        "./*"
+      ],
+      "meteor/mongo": [
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/local_collection_driver.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/collection/collection.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/asynchronous_cursor.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/doc_fetcher.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/mongo_common.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/mongo_connection.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/mongo_driver.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/mongo_utils.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/oplog_observe_driver.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/collection/collection_utils.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/collection/methods_async.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/collection/methods_index.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/collection/methods_replication.js",
+        "/home/austin/.meteor/packages/mongo/2.1.1/web.browser/collection/methods_sync.js"
+      ],
+      "meteor/reactive-var": [
+        "/home/austin/.meteor/packages/reactive-var/1.0.13/web.browser/reactive-var.js"
+      ],
+      "meteor/es5-shim": [
+        "/home/austin/.meteor/packages/es5-shim/4.8.1/web.browser/client.js",
+        "/home/austin/.meteor/packages/es5-shim/4.8.1/web.browser/console.js",
+        "/home/austin/.meteor/packages/es5-shim/4.8.1/web.browser/cordova.js",
+        "/home/austin/.meteor/packages/es5-shim/4.8.1/web.browser/export_globals.js",
+        "/home/austin/.meteor/packages/es5-shim/4.8.1/web.browser/import_globals.js"
+      ],
+      "meteor/ecmascript": [
+        "/home/austin/.meteor/packages/ecmascript/0.16.10/web.browser/ecmascript.js"
+      ],
+      "meteor/shell-server": [
+        "/home/austin/.meteor/packages/shell-server/0.6.1/web.browser/main.js",
+        "/home/austin/.meteor/packages/shell-server/0.6.1/web.browser/shell-server.js"
+      ],
+      "meteor/hot-module-replacement": [
+        "/home/austin/.meteor/packages/hot-module-replacement/0.5.4/web.browser/hot-api.js",
+        "/home/austin/.meteor/packages/hot-module-replacement/0.5.4/web.browser/client.js",
+        "/home/austin/.meteor/packages/hot-module-replacement/0.5.4/web.browser/server.js"
+      ],
+      "meteor/react-meteor-data": [
+        "/home/austin/.meteor/packages/react-meteor-data/3.0.3/web.browser/index.js",
+        "/home/austin/.meteor/packages/react-meteor-data/3.0.3/web.browser/suspense/index.js"
+      ]
+    }
+  },
+  "typeAcquisition": {
+    "include": [
+      "meteor"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    ".meteor"
+  ]
+}

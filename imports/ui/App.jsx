@@ -1,5 +1,5 @@
 import React from 'react';
-import { CarsTable } from './CarsTable.jsx';
+import { CarsTable } from './Cars/CarsTable.jsx';
 
 export const App = () => (
   <div>
