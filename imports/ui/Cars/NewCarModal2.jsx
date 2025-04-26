@@ -67,7 +67,7 @@ export const NewCarModal = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} onSubmit={handleSubmit}>
+      <Button variant="primary" onClick={handleShow}>
         New Car
       </Button>
 
@@ -77,21 +77,8 @@ export const NewCarModal = () => {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit} noValidate validated={validated}>
-            <Form.Group className="mb-3" as={Row} controlId="formTagNum">
-              <Form.Label column sm={3}>Tag Number</Form.Label>
-              <Col sm="9">
-                <Form.Control
-                  required
-                  type="string"
-                  placeholder="Tag Number"
-                  autoFocus
-                  size="sm"
-                  ref={tagRef}
-                />
-              </Col>
-            </Form.Group>
             <FloatingLabel
-                controlId="floatingTextarea"
+                controlId="formTagNumber"
                 label="Tag Number"
                 className="mb-3"
               >
@@ -104,9 +91,11 @@ export const NewCarModal = () => {
                   ref={tagRef}
                 />
               </FloatingLabel>
-            <Form.Group className="mb-3" as={Row} controlId="formASM">
-              <Form.Label column sm={3}>ASM</Form.Label>
-              <Col sm="9">
+              <FloatingLabel
+                controlId="formASM"
+                label="ASM"
+                className="mb-3"
+              >
                 <Form.Control
                   required
                   type="string"
@@ -114,28 +103,22 @@ export const NewCarModal = () => {
                   size="sm"
                   ref={asmRef}
                 />
-              </Col>
-            </Form.Group>
-            <Form.Group className="mb-3" as={Row} controlId="formTeam">
-              <Form.Label column sm={3}>Team</Form.Label>
-              <Col sm="9">
-                <Form.Select size="sm" ref={teamRef}>
-                  <option></option>
-                  <option value="TXM">TXM</option>
-                  <option value="Silver">Silver</option>
-                  <option value="Yellow">Yellow</option>
-                  <option value="Brown">Brown</option>
-                  <option value="Gold">Gold</option>
-                  <option value="Purple">Purple</option>
-                  <option value="Red">Red</option>
-                  <option value="Orange">Orange</option>
-                  <option value="Detail">Detail</option>
-                </Form.Select>
-              </Col>
-            </Form.Group>
-            <Form.Group className="mb-3" as={Row} controlId="formVehicle">
-              <Form.Label column sm={3}>Vehicle</Form.Label>
-              <Col sm="9">
+              </FloatingLabel>
+              <FloatingLabel controlId="formTeam" label="Team" className="mb-3">
+      <Form.Select aria-label="Team" size="sm" ref={teamRef}>
+        <option></option>
+        <option value="TXM">TXM</option>
+        <option value="Silver">Silver</option>
+        <option value="Yellow">Yellow</option>
+        <option value="Brown">Brown</option>
+        <option value="Gold">Gold</option>
+        <option value="Purple">Purple</option>
+        <option value="Red">Red</option>
+        <option value="Orange">Orange</option>
+        <option value="Detail">Detail</option>
+      </Form.Select>
+    </FloatingLabel>
+    <FloatingLabel controlId="formVehicle" label="Vehicle" className="mb-3">
                 <Form.Select size="sm" ref={vehicleRef}>
                   <option></option>
                   {vehicleType.map((vehicle) => (
@@ -144,11 +127,8 @@ export const NewCarModal = () => {
                     </option>
                   ))}
                 </Form.Select>
-              </Col>
-            </Form.Group>
-            <Form.Group className="mb-3" as={Row} controlId="formColor">
-              <Form.Label column sm={3}>Color</Form.Label>
-              <Col sm="9">
+              </FloatingLabel>
+              <FloatingLabel controlId="formColor" label="Color" className="mb-3">
                 <Form.Select size="sm" ref={colorRef}>
                   <option></option>
                   <option value="White">White</option>
@@ -168,11 +148,8 @@ export const NewCarModal = () => {
                   <option value="Purple">Purple</option>
                   <option value="Beige">Beige</option>
                 </Form.Select>
-              </Col>
-            </Form.Group>
-            <Form.Group className="mb-3" as={Row} controlId="formVIN">
-              <Form.Label column sm={3}>VIN</Form.Label>
-              <Col sm="9">
+              </FloatingLabel>
+              <FloatingLabel controlId="formVin" label="Vin" className="mb-3">
                 <Form.Control
                   required
                   type="string"
@@ -180,22 +157,16 @@ export const NewCarModal = () => {
                   size="sm"
                   ref={vinRef}
                 />
-              </Col>
-            </Form.Group>
-            <Form.Group className="mb-3" as={Row} controlId="formStatus">
-              <Form.Label column sm={3}>Status</Form.Label>
-              <Col sm="9">
+              </FloatingLabel>
+              <FloatingLabel controlId="formStatus" label="Status" className="mb-3">
               <FormSelect size="sm" ref={statusRef}>
                 <option></option>
                 <option value="Prep">Prep</option>
                 <option value="Ready">Ready</option>
                 <option value="Waiting">Waiting</option>
               </FormSelect>
-              </Col>
-            </Form.Group>
-            <Form.Group className="mb-3" as={Row} controlId="formPorter">
-              <Form.Label column sm={3}>Porter</Form.Label>
-              <Col sm="9">
+              </FloatingLabel>
+              <FloatingLabel controlId="formPorter" label="Porter" className="mb-3">
                 <Form.Control
                   required
                   type="string"
@@ -203,11 +174,8 @@ export const NewCarModal = () => {
                   size="sm"
                   ref={porterRef}
                 />
-              </Col>
-            </Form.Group>
-            <Form.Group className="mb-3" as={Row} controlId="formUsername">
-              <Form.Label column sm={3}>Username</Form.Label>
-              <Col sm="9">
+              </FloatingLabel>
+              <FloatingLabel controlId="formUsername" label="Username" className="mb-3">
                 <Form.Control
                   required
                   type="string"
@@ -215,11 +183,8 @@ export const NewCarModal = () => {
                   size="sm"
                   ref={usernameRef}
                 />
-              </Col>
-            </Form.Group>
-            <Form.Group className="mb-3" as={Row} controlId="formWash">
-              <Form.Label column sm={3}>Wash</Form.Label>
-              <Col sm="9">
+              </FloatingLabel>
+              <FloatingLabel controlId="formWash" label="Wash" className="mb-3">
                 <Form.Control
                   required
                   type="string"
@@ -227,8 +192,7 @@ export const NewCarModal = () => {
                   size="sm"
                   ref={washRef}
                 />
-              </Col>
-            </Form.Group>
+              </FloatingLabel>
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>

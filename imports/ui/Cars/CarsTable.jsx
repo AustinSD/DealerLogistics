@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { CarsCollection } from '/imports/api/CarsCollection.js';
 import { UpdateCar } from '/imports/ui/Cars/UpdateCar.jsx';
-import { NewCarModal } from './NewCarModal';
+import { NewCarModal } from './NewCarModal2';
 import { useFind, useSubscribe, useTracker } from 'meteor/react-meteor-data';
 
 
