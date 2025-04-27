@@ -25,6 +25,7 @@ export const NewCarModal = () => {
   const porterRef = React.useRef();
   const usernameRef = React.useRef();
   const washRef = React.useRef();
+  const notesRef = React.useRef();
 
   const isLoading = useSubscribe("vehicles");
   const vehicleType = useTracker(() => VehiclesTypeCollection.find({}).fetch());
@@ -43,6 +44,7 @@ export const NewCarModal = () => {
       status: statusRef.current.value,
       porter: porterRef.current.value,
       username: usernameRef.current.value,
+      notes: notesRef.current.value,
       wash: washRef.current.value,
       timestamp: new Date()
     });
@@ -73,126 +75,119 @@ export const NewCarModal = () => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>New Car</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit} noValidate validated={validated}>
             <FloatingLabel
-                controlId="formTagNumber"
-                label="Tag Number"
-                className="mb-3"
-              >
-                <Form.Control
-                  required
-                  type="string"
-                  placeholder="Tag Number"
-                  autoFocus
-                  size="sm"
-                  ref={tagRef}
-                />
-              </FloatingLabel>
-              <FloatingLabel
-                controlId="formASM"
-                label="ASM"
-                className="mb-3"
-              >
-                <Form.Control
-                  required
-                  type="string"
-                  placeholder="ASM"
-                  size="sm"
-                  ref={asmRef}
-                />
-              </FloatingLabel>
-              <FloatingLabel controlId="formTeam" label="Team" className="mb-3">
-      <Form.Select aria-label="Team" size="sm" ref={teamRef}>
-        <option></option>
-        <option value="TXM">TXM</option>
-        <option value="Silver">Silver</option>
-        <option value="Yellow">Yellow</option>
-        <option value="Brown">Brown</option>
-        <option value="Gold">Gold</option>
-        <option value="Purple">Purple</option>
-        <option value="Red">Red</option>
-        <option value="Orange">Orange</option>
-        <option value="Detail">Detail</option>
-      </Form.Select>
-    </FloatingLabel>
-    <FloatingLabel controlId="formVehicle" label="Vehicle" className="mb-3">
-                <Form.Select size="sm" ref={vehicleRef}>
-                  <option></option>
-                  {vehicleType.map((vehicle) => (
-                    <option key={vehicle._id} value={vehicle.vehicleType}>
-                      {vehicle.vehicleType}
-                    </option>
-                  ))}
-                </Form.Select>
-              </FloatingLabel>
-              <FloatingLabel controlId="formColor" label="Color" className="mb-3">
-                <Form.Select size="sm" ref={colorRef}>
-                  <option></option>
-                  <option value="White">White</option>
-                  <option value="Black">Black</option>
-                  <option value="Blue">Blue</option>
-                  <option value="Light Blue">Light Blue</option>
-                  <option value="Silver">Silver</option>
-                  <option value="Grey">Grey</option>
-                  <option value="Red">Red</option>
-                  <option value="Burgandy">Burgandy</option>
-                  <option value="Green">Green</option>
-                  <option value="Mint Green">Mint Green</option>
-                  <option value="Brown">Brown</option>
-                  <option value="Beige">Beige</option>
-                  <option value="Orange">Orange</option>
-                  <option value="Yellow">Yellow</option>
-                  <option value="Purple">Purple</option>
-                  <option value="Beige">Beige</option>
-                </Form.Select>
-              </FloatingLabel>
-              <FloatingLabel controlId="formVin" label="Vin" className="mb-3">
-                <Form.Control
-                  required
-                  type="string"
-                  placeholder="VIN"
-                  size="sm"
-                  ref={vinRef}
-                />
-              </FloatingLabel>
-              <FloatingLabel controlId="formStatus" label="Status" className="mb-3">
+              controlId="formTagNumber"
+              label="Tag Number"
+              className="mb-3"
+            >
+              <Form.Control
+                required
+                type="string"
+                placeholder="Tag Number"
+                autoFocus
+                size="sm"
+                ref={tagRef}
+              />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="formASM"
+              label="ASM"
+              className="mb-3"
+            >
+              <Form.Control
+                required
+                type="string"
+                placeholder="ASM"
+                size="sm"
+                ref={asmRef}
+              />
+            </FloatingLabel>
+            <FloatingLabel controlId="formTeam" label="Team" className="mb-3">
+              <Form.Select aria-label="Team" size="sm" ref={teamRef}>
+                <option></option>
+                <option value="TXM">TXM</option>
+                <option value="Silver">Silver</option>
+                <option value="Yellow">Yellow</option>
+                <option value="Brown">Brown</option>
+                <option value="Gold">Gold</option>
+                <option value="Purple">Purple</option>
+                <option value="Red">Red</option>
+                <option value="Orange">Orange</option>
+                <option value="Detail">Detail</option>
+              </Form.Select>
+            </FloatingLabel>
+            <FloatingLabel controlId="formVehicle" label="Vehicle" className="mb-3">
+              <Form.Select size="sm" ref={vehicleRef}>
+                <option></option>
+                {vehicleType.map((vehicle) => (
+                  <option key={vehicle._id} value={vehicle.vehicleType}>
+                    {vehicle.vehicleType}
+                  </option>
+                ))}
+              </Form.Select>
+            </FloatingLabel>
+            <FloatingLabel controlId="formColor" label="Color" className="mb-3">
+              <Form.Select size="sm" ref={colorRef}>
+                <option></option>
+                <option value="White">White</option>
+                <option value="Black">Black</option>
+                <option value="Blue">Blue</option>
+                <option value="Light Blue">Light Blue</option>
+                <option value="Silver">Silver</option>
+                <option value="Grey">Grey</option>
+                <option value="Red">Red</option>
+                <option value="Burgandy">Burgandy</option>
+                <option value="Green">Green</option>
+                <option value="Mint Green">Mint Green</option>
+                <option value="Brown">Brown</option>
+                <option value="Beige">Beige</option>
+                <option value="Orange">Orange</option>
+                <option value="Yellow">Yellow</option>
+                <option value="Purple">Purple</option>
+                <option value="Beige">Beige</option>
+              </Form.Select>
+            </FloatingLabel>
+            <FloatingLabel controlId="formVin" label="Vin" className="mb-3">
+              <Form.Control
+                required
+                type="string"
+                placeholder="VIN"
+                size="sm"
+                ref={vinRef}
+              />
+            </FloatingLabel>
+            <FloatingLabel controlId="formStatus" label="Status" className="mb-3">
               <FormSelect size="sm" ref={statusRef}>
                 <option></option>
                 <option value="Prep">Prep</option>
                 <option value="Ready">Ready</option>
                 <option value="Waiting">Waiting</option>
               </FormSelect>
-              </FloatingLabel>
-              <FloatingLabel controlId="formPorter" label="Porter" className="mb-3">
-                <Form.Control
-                  required
-                  type="string"
-                  placeholder="Porter"
-                  size="sm"
-                  ref={porterRef}
-                />
-              </FloatingLabel>
-              <FloatingLabel controlId="formUsername" label="Username" className="mb-3">
-                <Form.Control
-                  required
-                  type="string"
-                  placeholder="Username"
-                  size="sm"
-                  ref={usernameRef}
-                />
-              </FloatingLabel>
-              <FloatingLabel controlId="formWash" label="Wash" className="mb-3">
-                <Form.Control
-                  required
-                  type="string"
-                  placeholder="Wash"
-                  size="sm"
-                  ref={washRef}
-                />
-              </FloatingLabel>
+            </FloatingLabel>
+            <FloatingLabel controlId="formNotes" label="Notes" className="mb-3">
+              <Form.Control
+                required
+                type="string"
+                placeholder="Notes"
+                as="textarea"
+                rows={3}
+                size="sm"
+                ref={notesRef}
+              />
+            </FloatingLabel>
+            <FloatingLabel controlId="formWash" label="Wash" className="mb-3">
+              <Form.Select size="sm" ref={washRef}>
+                <option></option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Already Washed">Already Washed</option>
+              </Form.Select>
+            </FloatingLabel>
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>

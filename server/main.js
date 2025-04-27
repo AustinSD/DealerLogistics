@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import { CarsCollection, VehiclesTypeCollection } from '/imports/api/CarsCollection';
 
 import '../imports/api/CarsPublications.js';
@@ -23,6 +24,12 @@ const insertCar = (carInfo) =>
     vehicleType: vehicleType
   });
   
+  const SEED_USERNAME_1 = 'austin';
+const SEED_PASSWORD_1 = 'password';
+
+const SEED_USERNAME_2 = 'user';
+const SEED_PASSWORD_2 = 'password';
+
 Meteor.startup(async () => {
   if ((await CarsCollection.find().countAsync()) === 0) {
     [
@@ -69,5 +76,19 @@ Meteor.startup(async () => {
       "Other"
     ].forEach(insertVehicleType);
   }
+
+  if (!(await Accounts.findUserByUsername(SEED_USERNAME_1))) {
+    await Accounts.createUser({
+      username: SEED_USERNAME_1,
+      password: SEED_PASSWORD_2,
+    });
+  }
+  if (!(await Accounts.findUserByUsername(SEED_USERNAME_2))) {
+    await Accounts.createUser({
+      username: SEED_USERNAME_2,
+      password: SEED_PASSWORD_2,
+    });
+  }
+
 });
 
