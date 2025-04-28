@@ -11,10 +11,17 @@ export const CarsTable = () => {
     const isLoading = useSubscribe("cars");
     const cars = useTracker(() => CarsCollection.find({}).fetch());
 
+    const user = useTracker(() => Meteor.user());
+    console.log(user);
+    console.log(Roles.userIsInRole(user, 'admin'));
+    console.log(Roles.getRolesForUser(user));
+
     return (
         <>
-            
-            <NewCarModal></NewCarModal>
+            {Roles.userIsInRole(user, 'Advisors') ? (
+                <NewCarModal></NewCarModal>
+            ) : null}
+
             <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
@@ -33,7 +40,7 @@ export const CarsTable = () => {
                 </thead>
                 <tbody>
                     {cars.map(car =>
-                        <tr >
+                        <tr key={car._id}>
                             <td>{car.tagnum}</td>
                             <td>{car.asm}</td>
                             <td>{car.team}</td>
@@ -45,7 +52,7 @@ export const CarsTable = () => {
                             <td>{car.username}</td>
                             <td>{car.wash}</td>
                             <td>
-                                <UpdateCar car={car} />
+                                <UpdateCar key={car._id} car={car} />
                             </td>
                         </tr>
                     )}

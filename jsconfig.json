@@ -61,6 +61,13 @@
         "/home/austin/.meteor/packages/accounts-password/3.0.3/web.browser/password_client.js",
         "/home/austin/.meteor/packages/accounts-password/3.0.3/web.browser/email_templates.js",
         "/home/austin/.meteor/packages/accounts-password/3.0.3/web.browser/password_server.js"
+      ],
+      "meteor/roles": [
+        "/home/austin/.meteor/packages/roles/1.0.1/web.browser/roles_client.js",
+        "/home/austin/.meteor/packages/roles/1.0.1/web.browser/roles_common_async.js",
+        "/home/austin/.meteor/packages/roles/1.0.1/web.browser/client/debug.js",
+        "/home/austin/.meteor/packages/roles/1.0.1/web.browser/client/uiHelpers.js",
+        "/home/austin/.meteor/packages/roles/1.0.1/web.browser/roles_server.js"
       ]
     }
   },

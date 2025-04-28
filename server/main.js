@@ -1,9 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { CarsCollection, VehiclesTypeCollection } from '/imports/api/CarsCollection';
+import { Roles } from "meteor/roles";
 
 import '../imports/api/CarsPublications.js';
 import '../imports/api/carsMethods.js';
+import '../imports/api/UserPublications.js';
 
 const insertCar = (carInfo) =>
   CarsCollection.insertAsync({
@@ -29,6 +31,9 @@ const SEED_PASSWORD_1 = 'password';
 
 const SEED_USERNAME_2 = 'user';
 const SEED_PASSWORD_2 = 'password';
+
+const SEED_USERNAME_3 = 'advisor';
+const SEED_PASSWORD_3 = 'password';
 
 Meteor.startup(async () => {
   if ((await CarsCollection.find().countAsync()) === 0) {
@@ -89,6 +94,24 @@ Meteor.startup(async () => {
       password: SEED_PASSWORD_2,
     });
   }
+  if (!(await Accounts.findUserByUsername(SEED_USERNAME_3))) {
+    await Accounts.createUser({
+      username: SEED_USERNAME_3,
+      password: SEED_PASSWORD_3,
+    });
+  }
+
+  // Create base roles
+  await Roles.createRoleAsync("Porters", { unlessExists: true });
+  await Roles.createRoleAsync("Advisors", { unlessExists: true });
+  await Roles.createRoleAsync("admin", { unlessExists: true });
+
+  // Assign roles to users
+  const user1 = await Accounts.findUserByUsername(SEED_USERNAME_1);
+  await Roles.addUsersToRolesAsync(user1._id, ["admin", "Advisors"], { unlessExists: true });
+
+  const user2 = await Accounts.findUserByUsername(SEED_USERNAME_3);
+  await Roles.addUsersToRolesAsync(user2._id, ["Advisors"], { unlessExists: true });
 
 });
 
