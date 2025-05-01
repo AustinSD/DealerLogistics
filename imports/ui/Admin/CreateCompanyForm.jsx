@@ -1,0 +1,87 @@
+import { Meteor } from "meteor/meteor";
+import React from 'react';
+import { useState, useRef } from 'react';
+import Button from 'react-bootstrap/Button';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import { CarsCollection, VehiclesTypeCollection } from '/imports/api/CarsCollection.js';
+import { useSubscribe, useTracker } from 'meteor/react-meteor-data';
+import { FormSelect } from 'react-bootstrap';
+
+export const CreateCompanyForm = (props) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [validated, setValidated] = useState(false);
+  const companyRef = React.useRef();
+  const addressRef = React.useRef();
+  const phoneRef = React.useRef();
+
+  const handleClose = (event) => {
+    event.preventDefault();
+    this.props.callbackModal();
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+
+    console.log("Company Name: ", companyRef.current.value);
+    console.log("Address: ", addressRef.current.value);
+    console.log("Phone: ", phoneRef.current.value);
+  };
+
+  return (
+    <Form onSubmit={handleSubmit} noValidate validated={validated}>
+            <FloatingLabel
+              controlId="formCompanyName"
+              label="Company Number"
+              className="mb-3"
+            >
+              <Form.Control
+                required
+                type="string"
+                placeholder="Company Name"
+                autoFocus
+                size="sm"
+                ref={companyRef}
+              />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="formAddress"
+              label="Address"
+              className="mb-3"
+            >
+              <Form.Control
+                required
+                type="string"
+                placeholder="Address"
+                size="sm"
+                ref={addressRef}
+              />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="formPhone"
+              label="Phone"
+              className="mb-3"
+            >
+              <Form.Control
+                required
+                type="tel"
+                placeholder="Phone"
+                size="sm"
+                ref={phoneRef}
+              />
+            </FloatingLabel>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button type="submit">Submit form</Button>
+          </Form>
+  );
+};

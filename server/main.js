@@ -38,9 +38,9 @@ const SEED_PASSWORD_3 = 'password';
 Meteor.startup(async () => {
   if ((await CarsCollection.find().countAsync()) === 0) {
     [
-      { tagnum: '2222', asm: 'John', team: 'Gold', vehicle: 'Camary', color: 'Black', vin: '3456', status: 'done', porter: 'Tim', username: 'user_john', wash: 'Yes' },
-      { tagnum: '3333', asm: 'Matt', team: 'Silver', vehicle: '4Runner', color: 'White', vin: '4321', status: 'done', porter: 'Tim', username: 'user_john', wash: 'Yes' },
-      { tagnum: '4444', asm: 'John', team: 'Gold', vehicle: 'Titan', color: 'Blue', vin: '9856', status: 'done', porter: 'Tim', username: 'user_john', wash: 'Yes' },
+      { tagnum: '2222', asm: 'John', team: 'Silver', vehicle: 'Corolla', color: 'Black', vin: '3456', status: 'Prep', porter: 'Tim', username: 'user_john', wash: 'Yes' },
+      { tagnum: '3333', asm: 'Matt', team: 'Silver', vehicle: 'Highlander', color: 'White', vin: '4321', status: 'Prep', porter: 'Tim', username: 'user_john', wash: 'Yes' },
+      { tagnum: '4444', asm: 'John', team: 'Silver', vehicle: 'Solara', color: 'Blue', vin: '9856', status: 'Prep', porter: 'Tim', username: 'user_john', wash: 'Yes' },
     ].forEach(insertCar);
   }
 

@@ -1,5 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import React, { useState } from "react";
+import { CreateCompanyForm } from "./Admin/CreateCompanyForm";
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -12,6 +13,7 @@ export const LoginForm = () => {
   };
 
   return (
+    <div className="login-form-container">
     <form onSubmit={submit} className="login-form">
       <label htmlFor="username">Username</label>
 
@@ -35,5 +37,8 @@ export const LoginForm = () => {
 
       <button type="submit">Log In</button>
     </form>
+
+    <CreateCompanyForm />
+    </div>
   );
 };

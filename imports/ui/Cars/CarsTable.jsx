@@ -2,7 +2,7 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { CarsCollection } from '/imports/api/CarsCollection.js';
-import { UpdateCar } from '/imports/ui/Cars/UpdateCar.jsx';
+import { UpdateCar } from '/imports/ui/Cars/UpdateCar2.jsx';
 import { NewCarModal } from './NewCarModal2';
 import { useFind, useSubscribe, useTracker } from 'meteor/react-meteor-data';
 
@@ -32,6 +32,7 @@ export const CarsTable = () => {
                         <th>Color</th>
                         <th>VIN - Last 4</th>
                         <th>Status</th>
+                        <th>Additional Notes</th>
                         <th>Porter</th>
                         <th>Username</th>
                         <th>Wash</th>
@@ -48,6 +49,7 @@ export const CarsTable = () => {
                             <td>{car.color}</td>
                             <td>{car.vin}</td>
                             <td>{car.status}</td>
+                            <td>{car.notes}</td>
                             <td>{car.porter}</td>
                             <td>{car.username}</td>
                             <td>{car.wash}</td>
