@@ -6,6 +6,9 @@ import { Roles } from "meteor/roles";
 import '../imports/api/CarsPublications.js';
 import '../imports/api/carsMethods.js';
 import '../imports/api/UserPublications.js';
+import '../imports/api/companyMethods.js';
+import '../imports/api/CompanyPublications.js';
+import './userMethods.js';
 
 const insertCar = (carInfo) =>
   CarsCollection.insertAsync({
@@ -86,18 +89,21 @@ Meteor.startup(async () => {
     await Accounts.createUser({
       username: SEED_USERNAME_1,
       password: SEED_PASSWORD_2,
-    });
+      email: SEED_USERNAME_1 + '@example.com',
+    })
   }
   if (!(await Accounts.findUserByUsername(SEED_USERNAME_2))) {
     await Accounts.createUser({
       username: SEED_USERNAME_2,
       password: SEED_PASSWORD_2,
+      email: SEED_USERNAME_2 + '@example.com',
     });
   }
   if (!(await Accounts.findUserByUsername(SEED_USERNAME_3))) {
     await Accounts.createUser({
       username: SEED_USERNAME_3,
       password: SEED_PASSWORD_3,
+      email: SEED_USERNAME_3 + '@example.com',
     });
   }
 

@@ -21,7 +21,7 @@ export const CreateCompanyForm = (props) => {
     event.preventDefault();
     this.props.callbackModal();
   }
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -30,10 +30,26 @@ export const CreateCompanyForm = (props) => {
     }
 
     setValidated(true);
+    if (form.checkValidity()) {
+      console.log("Company Name: ", companyRef.current.value);
+      console.log("Address: ", addressRef.current.value);
+      console.log("Phone: ", phoneRef.current.value);
+      await Meteor.callAsync("company.insert", {
+        company: companyRef.current.value,
+        address: addressRef.current.value,
+        phone: phoneRef.current.value,
+        admin: Meteor.user().emails[0].address,
+        timestamp: new Date()
+      }).then(async () => {
+        console.log("Company added successfully");
+        //handleClose();
+      });
+    } else {
+      console.log("Form is not valid");
+      return;
+    }
 
-    console.log("Company Name: ", companyRef.current.value);
-    console.log("Address: ", addressRef.current.value);
-    console.log("Phone: ", phoneRef.current.value);
+    
   };
 
   return (
