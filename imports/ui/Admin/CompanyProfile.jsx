@@ -2,8 +2,8 @@ import { Meteor } from "meteor/meteor";
 import React, { use, useEffect, useState } from 'react';
 import { CompanyCollection } from "/imports/api/CompanyCollection.js";
 import { useSubscribe, useTracker } from 'meteor/react-meteor-data';
-import { CreateUser } from "./CreateUser";
 import { CreateUserModal } from "./CreateUserModal";
+import { UserTable } from "./UserTable";
 
 export const CompanyProfile = (props) => {
     const [company, setCompany] = useState("");
@@ -35,8 +35,8 @@ export const CompanyProfile = (props) => {
             </div>
             <div>
                 <h3>Company Users</h3>
-                <CreateUserModal />
-                {/* <CreateUser /> */}
+                <UserTable />
+                
                 {/* Add logic to display users associated with the company */}      
             </div>
         </div>

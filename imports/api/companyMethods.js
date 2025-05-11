@@ -31,4 +31,8 @@ Meteor.methods({
       return;
     }
   },
+  "company.getAllUsers"(company) {
+    const users = Meteor.callAsync("getCompanyUsers", company);
+    return users;
+  }
 });

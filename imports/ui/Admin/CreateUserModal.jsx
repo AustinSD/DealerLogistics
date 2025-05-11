@@ -4,9 +4,12 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { CreateUserForm } from './CreateUserForm';
 
-export const CreateUserModal = () => {
+export const CreateUserModal = (props) => {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+        setShow(false);
+        props.handleClose();
+    };
   const handleShow = () => setShow(true);
 
   return (
