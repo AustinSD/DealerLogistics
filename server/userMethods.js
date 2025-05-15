@@ -16,6 +16,16 @@ Meteor.methods({
         const result = await CompanyCollection.findOneAsync({ company: company });
         return result;
       },
+      async createUserForCompany(username, password, email, company, role) {
+        const userId = await Accounts.createUser({
+            username: username,
+            password: password,
+            email: email,
+            profile: { company: company }
+        });
+        Roles.addUsersToRolesAsync(userId, [role]);
+        return userId;
+      },
       async createUserForCompanyAdvisor(username, password, email, company) {
         const userId = await Accounts.createUser({
             username: username,
@@ -47,10 +57,8 @@ Meteor.methods({
         return userId;
       },
       async getCompanyUsers(company) {
-        console.log(" GET COMPANY USERS");
         const users = await Meteor.users.find({ "profile.company": company }).fetch();
         const promises = users.map(async (user) => {
-          // const globalRoles = await Roles.getRolesForUserAsync(user._id);
           user.role = await Roles.getRolesForUserAsync(user._id)
         });
         const results = await Promise.all(promises);

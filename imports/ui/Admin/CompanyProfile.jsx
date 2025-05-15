@@ -4,6 +4,9 @@ import { CompanyCollection } from "/imports/api/CompanyCollection.js";
 import { useSubscribe, useTracker } from 'meteor/react-meteor-data';
 import { CreateUserModal } from "./CreateUserModal";
 import { UserTable } from "./UserTable";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export const CompanyProfile = (props) => {
     const [company, setCompany] = useState("");
@@ -25,20 +28,27 @@ export const CompanyProfile = (props) => {
     }, [companyId]);
 
     return (
-        <div>
+        <Container>
             <h1>Company Profile</h1>
-            <div>
-                <h2>Company Name: {company}</h2>
-                <p>Address: {address}</p>
-                <p>Phone: {phone}</p>
-                <p>Admin: {admin}</p>
-            </div>
-            <div>
-                <h3>Company Users</h3>
-                <UserTable />
-                
-                {/* Add logic to display users associated with the company */}      
-            </div>
-        </div>
+            <Row>
+                <Col>
+                    <div>
+                        <h2>Company Name: {company}</h2>
+                        <p>Address: {address}</p>
+                        <p>Phone: {phone}</p>
+                        <p>Admin: {admin}</p>
+                    </div>
+                </Col>
+                <Col>
+                    <div>
+                        <h3>Company Users</h3>
+                        <UserTable />
+
+                        {/* Add logic to display users associated with the company */}
+                    </div>
+                </Col>
+            </Row>
+        </Container>
+
     );
 }

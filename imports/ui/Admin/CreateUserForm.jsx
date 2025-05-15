@@ -10,6 +10,7 @@ export const CreateUserForm = (props) => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [validated, setValidated] = useState(false);
+    const [role, setRole] = useState("");
 
     const user = useTracker(() => Meteor.user());
 
@@ -26,11 +27,12 @@ export const CreateUserForm = (props) => {
 
         setValidated(true);
         if (form.checkValidity()) {
-            await Meteor.callAsync("createUserForCompanyAdvisor",
+            await Meteor.callAsync("createUserForCompany",
                 username,
                 password,
                 email,
-                user.profile.company
+                user.profile.company,
+                role
             );
             handleClose();
         } else {
@@ -46,6 +48,8 @@ export const CreateUserForm = (props) => {
             setPassword(value);
         } else if (name === "email") {
             setEmail(value);
+        } else if (name === "role") {
+            setRole(value);
         }
     }
     const handleCreateUser = async (event) => {
@@ -109,6 +113,23 @@ export const CreateUserForm = (props) => {
                         value={email}
                         onChange={handleChange}
                     />
+                </FloatingLabel>
+                <FloatingLabel
+                controlId="formRoleSelect"
+                label="Role"
+                className="mb-3"
+                >
+                    <Form.Select
+                        required
+                        size="sm"
+                        name="role"
+                        onChange={handleChange}
+                    >
+                        <option value="">Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="Advisors">Advisors</option>
+                        <option value="Porters">Porters</option>
+                    </Form.Select>
                 </FloatingLabel>
                 <Button type="submit">Create User</Button>
                 <Button variant="secondary" onClick={handleClose}>Close</Button>
