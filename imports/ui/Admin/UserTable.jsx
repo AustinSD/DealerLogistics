@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import Table from 'react-bootstrap/Table';
 import { CreateUserModal } from "./CreateUserModal";
+import Button from 'react-bootstrap/Button';
 
 export const UserTable = (props) => {
     const [companyUsers, setCompanyUsers] = useState([]);
@@ -16,6 +17,12 @@ export const UserTable = (props) => {
         const users = await Meteor.callAsync("getCompanyUsers", user.profile.company);
         setCompanyUsers(users);
     };
+
+    const deleteUser = async (userId, role) => {
+        const result = await Meteor.callAsync("removeUserFromCompany", userId, role);
+        console.log(result)
+
+    }
 
     useEffect(() => {
         fetchData();
@@ -38,6 +45,7 @@ export const UserTable = (props) => {
                             <td>{user.username}</td>
                             <td>{user.emails[0].address}</td>
                             <td>{user.role}</td>
+                            <td> <Button onClick={() => deleteUser(user._id, user.role)}/></td>
                         </tr>
                     )}
 
