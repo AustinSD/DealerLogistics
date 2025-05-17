@@ -18,10 +18,13 @@ export const UserTable = (props) => {
         setCompanyUsers(users);
     };
 
-    const deleteUser = async (userId, role) => {
-        const result = await Meteor.callAsync("removeUserFromCompany", userId, role);
-        console.log(result)
-
+    const deleteUser = async (userId, username, role) => {
+        const result = await Meteor.callAsync("removeUserFromCompany", userId, username, role).then(() => {
+            fetchData();
+        }
+        ).catch((error) => {
+            console.error("Error deleting user:", error);
+        });
     }
 
     useEffect(() => {
@@ -37,6 +40,7 @@ export const UserTable = (props) => {
                         <th>Username</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,7 +49,7 @@ export const UserTable = (props) => {
                             <td>{user.username}</td>
                             <td>{user.emails[0].address}</td>
                             <td>{user.role}</td>
-                            <td> <Button onClick={() => deleteUser(user._id, user.role)}/></td>
+                            <td> <Button onClick={() => deleteUser(user._id, user.username, user.role)}> Delete User </Button></td>
                         </tr>
                     )}
 

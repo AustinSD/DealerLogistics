@@ -16,8 +16,10 @@ Meteor.methods({
         const result = await CompanyCollection.findOneAsync({ company: company });
         return result;
       },
-      async removeUserFromCompany(userId, role) {
-        const result = await Roles.removeUsersFromRolesAsync(userId, [role]);
+      async removeUserFromCompany(userId, username, role) {
+        const user = await Accounts.findUserByUsername(username);
+        await Roles.removeUsersFromRolesAsync(user._id, role);
+        const result = await Meteor.users.removeAsync({ _id: userId });
         return result;
       },
       async createUserForCompany(username, password, email, company, role) {
