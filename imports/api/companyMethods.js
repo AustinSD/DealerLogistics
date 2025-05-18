@@ -34,5 +34,17 @@ Meteor.methods({
   "company.getAllUsers"(company) {
     const users = Meteor.callAsync("getCompanyUsers", company);
     return users;
-  }
+  },
+  "company.updatePorter"(companyName, newPorters) {
+    try {
+      const result = CompanyCollection.updateAsync(
+                  { company: companyName },
+                  { $set: { porters: newPorters } }
+              );
+      return result;
+    } catch (error) {
+      throw new Meteor.Error("Error updating porters", error.message);
+      return;
+    }
+  },
 });

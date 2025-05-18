@@ -1,8 +1,8 @@
 import { Meteor } from "meteor/meteor";
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CompanyCollection } from "/imports/api/CompanyCollection.js";
+import { PorterTable } from "./PorterTable";
 import { useSubscribe, useTracker } from 'meteor/react-meteor-data';
-import { CreateUserModal } from "./CreateUserModal";
 import { UserTable } from "./UserTable";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -43,8 +43,12 @@ export const CompanyProfile = (props) => {
                     <div>
                         <h3>Company Users</h3>
                         <UserTable />
-
-                        {/* Add logic to display users associated with the company */}
+                    </div>
+                </Col>
+                <Col>
+                    <div>
+                        <h3>Company Porters</h3>
+                        <PorterTable />
                     </div>
                 </Col>
             </Row>
