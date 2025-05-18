@@ -9,7 +9,7 @@ import { useFind, useSubscribe, useTracker } from 'meteor/react-meteor-data';
 
 export const CarsTable = () => {
     const isLoading = useSubscribe("cars");
-    const cars = useTracker(() => CarsCollection.find({}).fetch());
+    const cars = useTracker(() => CarsCollection.find({ company: Meteor.user().profile.company }).fetch());
 
     const user = useTracker(() => Meteor.user());
     console.log(user);
@@ -18,7 +18,7 @@ export const CarsTable = () => {
 
     return (
         <>
-            {Roles.userIsInRole(user, 'Advisors') ? (
+            {Roles.userIsInRole(user, 'Advisors') || Roles.userIsInRole(user, 'admin') ? (
                 <NewCarModal></NewCarModal>
             ) : null}
 

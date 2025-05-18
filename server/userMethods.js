@@ -69,7 +69,19 @@ Meteor.methods({
         });
         const results = await Promise.all(promises);
         return users;
-      }, 
+      },
+      async getCompanyAdvisors(company) {
+        const advisors = [];
+        const users = await Meteor.users.find({ "profile.company": company }).fetch();
+        const promises = users.map(async (user) => {
+          const role = await Roles.getRolesForUserAsync(user._id);
+          if (role.includes("Advisors")) {
+            advisors.push(user);
+          }
+        });
+        await Promise.all(promises);
+        return advisors;
+      },
 
   });
 

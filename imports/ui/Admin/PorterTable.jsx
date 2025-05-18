@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { useSubscribe, useTracker } from 'meteor/react-meteor-data';
 import { CompanyCollection } from "/imports/api/CompanyCollection.js";
 
-export const PorterTable = (props) => {
+export const PorterTable = () => {
     const user = useTracker(() => Meteor.user());
     const isLoading = useSubscribe("company");
     const company = useTracker(() => CompanyCollection.find({ company: user.profile.company }).fetch());

@@ -4,6 +4,7 @@ import { CarsCollection, CarHistoryCollection, VehiclesTypeCollection } from "./
 Meteor.publish("cars", () => {
   return CarsCollection.find();
 });
+
 Meteor.publish("carhistory", () => {
   return CarHistoryCollection.find();
 });

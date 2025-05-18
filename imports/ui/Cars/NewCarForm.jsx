@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -11,6 +11,7 @@ import { FormSelect } from 'react-bootstrap';
 
 export const NewCarForm = (props) => {
   const [validated, setValidated] = useState(false);
+  const [companyAdvisors, setCompanyAdvisors] = useState([]);
   const tagRef = React.useRef();
   const asmRef = React.useRef();
   const teamRef = React.useRef();
@@ -27,10 +28,11 @@ export const NewCarForm = (props) => {
   const vehicleType = useTracker(() => VehiclesTypeCollection.find({}).fetch());
   const user = useTracker(() => Meteor.user());
 
+
   const handleClose = () => {
     props.handleClose();
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -53,18 +55,29 @@ export const NewCarForm = (props) => {
         username: user.username,
         notes: notesRef.current.value,
         wash: washRef.current.value,
+        company: Meteor.user().profile.company,
         timestamp: new Date()
       }).then(() => {
         console.log("Car added successfully");
         handleClose();
       });
       console.log("Car added successfully");
-        handleClose();
+      handleClose();
     } else {
       console.log("Form is not valid");
       return;
     }
   };
+
+  const fetchAdvisors = async () => {
+    const users = await Meteor.callAsync("getCompanyAdvisors", user.profile.company);
+    setCompanyAdvisors(users);
+  };
+
+  useEffect(() => {
+    fetchAdvisors();
+  }
+    , []);
 
   return (
     <>
@@ -83,18 +96,15 @@ export const NewCarForm = (props) => {
             ref={tagRef}
           />
         </FloatingLabel>
-        <FloatingLabel
-          controlId="formASM"
-          label="ASM"
-          className="mb-3"
-        >
-          <Form.Control
-            required
-            type="string"
-            placeholder="ASM"
-            size="sm"
-            ref={asmRef}
-          />
+        <FloatingLabel controlId="formASM" label="ASM" className="mb-3">
+          <Form.Select aria-label="ASM" size="sm" ref={asmRef} required>
+            <option></option>
+            {companyAdvisors.map((advisor) => (
+              <option key={advisor._id} value={advisor.username}>
+                {advisor.username}
+              </option>
+            ))}
+          </Form.Select>
         </FloatingLabel>
         <FloatingLabel controlId="formTeam" label="Team" className="mb-3">
           <Form.Select aria-label="Team" size="sm" ref={teamRef} required>
@@ -178,10 +188,10 @@ export const NewCarForm = (props) => {
           </Form.Select>
         </FloatingLabel>
         <div className="d-flex gap-2">
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button type="submit">Submit form</Button>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button type="submit">Submit form</Button>
         </div>
       </Form>
     </>
