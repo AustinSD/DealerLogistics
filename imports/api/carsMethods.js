@@ -1,5 +1,5 @@
 import { Meteor } from "meteor/meteor";
-import { CarsCollection } from "./CarsCollection";
+import { CarsCollection, CarHistoryCollection } from "./CarsCollection";
 
 Meteor.methods({
   "cars.insert"(doc) {
@@ -18,6 +18,11 @@ Meteor.methods({
     return CarsCollection.removeAsync(carId);
   },
   "cars.update"(carId, doc) {
+    if(doc.status === "Completed" || doc.status === "Deleted") {
+      CarHistoryCollection.insertAsync(doc);
+      CarsCollection.removeAsync(carId);
+      return;
+    }
     return CarsCollection.updateAsync(carId, { $set: doc });
   },
   "cars.findOne"(carId) {

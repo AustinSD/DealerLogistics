@@ -16,13 +16,26 @@ export const CarsTable = () => {
     console.log(Roles.userIsInRole(user, 'admin'));
     console.log(Roles.getRolesForUser(user));
 
+    const getColor = (status) => {
+        switch (status) {
+            case 'Prep':
+                return ' #25a6cc';
+            case 'Ready':
+                return '#f5e62f';
+            case 'Waiting':
+                return '#db1919';
+            default:
+                return 'gray';
+        }
+    };
+
     return (
         <>
             {Roles.userIsInRole(user, 'Advisors') || Roles.userIsInRole(user, 'admin') ? (
                 <NewCarModal></NewCarModal>
             ) : null}
 
-            <Table striped bordered hover variant="dark">
+            <Table >
                 <thead>
                     <tr>
                         <th>Tag Number</th>
@@ -41,7 +54,7 @@ export const CarsTable = () => {
                 </thead>
                 <tbody>
                     {cars.map(car =>
-                        <tr key={car._id}>
+                        <tr key={car._id} bgcolor={getColor(car.status)} style={{ backgroundColor: getColor(car.status), '--bs-table-bg': getColor(car.status) }}>
                             <td>{car.tagnum}</td>
                             <td>{car.asm}</td>
                             <td>{car.team}</td>
