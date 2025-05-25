@@ -2,6 +2,7 @@ import { Meteor } from "meteor/meteor";
 import React, { useEffect, useState } from 'react';
 import { CompanyCollection } from "/imports/api/CompanyCollection.js";
 import { PorterTable } from "./PorterTable";
+import { DriverTable } from "./DriverTable";
 import { useSubscribe, useTracker } from 'meteor/react-meteor-data';
 import { UserTable } from "./UserTable";
 import Container from 'react-bootstrap/Container';
@@ -49,6 +50,12 @@ export const CompanyProfile = (props) => {
                     <div>
                         <h3>Company Porters</h3>
                         <PorterTable />
+                    </div>
+                </Col>
+                <Col>
+                    <div>
+                        <h3>Company Drivers</h3>
+                        <DriverTable />
                     </div>
                 </Col>
             </Row>

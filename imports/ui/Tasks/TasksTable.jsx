@@ -18,6 +18,8 @@ export const TasksTable = () => {
   
   return (
     <>
+    <h1>Tasks Management</h1>
+    
     {Roles.userIsInRole(user, 'Advisors') || Roles.userIsInRole(user, 'admin') ? (
                     <NewTaskModal></NewTaskModal>
                 ) : null}

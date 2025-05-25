@@ -10,28 +10,20 @@ import { FormSelect } from 'react-bootstrap';
 export const UpdateShuttle = ({ shuttle, company }) => {    
     const [show, setShow] = useState(false);
     const [validated, setValidated] = useState(false);
-    const [companyAdvisors, setCompanyAdvisors] = useState([]);
+
     const timeRef = React.useRef();
-    const asmRef = React.useRef();
     const customerNameRef = React.useRef();
     const phoneNumberRef = React.useRef();
     const addressRef = React.useRef();
     const driverRef = React.useRef();
     const notesRef = React.useRef();
     const statusRef = React.useRef();
+    const timeOutRef = React.useRef();
+    const timeInRef = React.useRef();
     
     const handleClose = () => setShow(false);
-    const handleShow = () => {
-        setShow(true);
-        timeRef.current.value = shuttle.timeRequested;
-        asmRef.current.value = shuttle.asm;
-        customerNameRef.current.value = shuttle.customerName;
-        phoneNumberRef.current.value = shuttle.phoneNumber;
-        addressRef.current.value = shuttle.address;
-        driverRef.current.value = shuttle.driver;
-        notesRef.current.value = shuttle.notes;
-        statusRef.current.value = shuttle.status;
-    }; 
+    const handleShow = () => setShow(true);
+
     const handleSave = async (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -40,16 +32,33 @@ export const UpdateShuttle = ({ shuttle, company }) => {
             return
         }
         setValidated(true);
-        await Meteor.callAsync("shuttle.update", shuttle._id, {
-            timeRequested: timeRef.current.value,
-            asm: asmRef.current.value,
-            customerName: customerNameRef.current.value,
-            phoneNumber: phoneNumberRef.current.value,
-            address: addressRef.current.value,
-            driver: driverRef.current.value,
-            notes: notesRef.current.value,
-            status: statusRef.current.value,
-        });
+
+        if (statusRef.current.value === "Completed") {
+            await Meteor.callAsync("shuttle.remove", shuttle._id, {
+                timeRequested: timeRef.current.value,
+                customerName: customerNameRef.current.value,
+                phoneNumber: phoneNumberRef.current.value,
+                address: addressRef.current.value,
+                driver: driverRef.current.value,
+                notes: notesRef.current.value,
+                status: statusRef.current.value,
+                timeOut: timeOutRef.current.value,
+                timeIn: timeInRef.current.value,
+            });
+        }
+        else {
+            await Meteor.callAsync("shuttle.update", shuttle._id, {
+                timeRequested: timeRef.current.value,
+                customerName: customerNameRef.current.value,
+                phoneNumber: phoneNumberRef.current.value,
+                address: addressRef.current.value,
+                driver: driverRef.current.value,
+                notes: notesRef.current.value,
+                status: statusRef.current.value,
+                timeOut: timeOutRef.current.value,
+                timeIn: timeInRef.current.value,
+            });
+        }
         handleClose();
     };
 
@@ -67,24 +76,14 @@ export const UpdateShuttle = ({ shuttle, company }) => {
                     <Form noValidate validated={validated} onSubmit={handleSave}>
                         <FloatingLabel controlId="floatingInput" label="Time Requested" className="mb-3">
                             <Form.Control
-                                type="text"
+                                type="datetime-local"
                                 placeholder="Time Requested"
                                 ref={timeRef}
+                                defaultValue={shuttle.timeRequested}
                                 required
                             />
                             <Form.Control.Feedback type="invalid">
                                 Please provide a valid time.
-                            </Form.Control.Feedback>
-                        </FloatingLabel>
-                        <FloatingLabel controlId="floatingInput" label="ASM" className="mb-3">
-                            <Form.Control
-                                type="text"
-                                placeholder="ASM"
-                                ref={asmRef}
-                                required
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Please provide a valid ASM.
                             </Form.Control.Feedback>
                         </FloatingLabel>
                         <FloatingLabel controlId="floatingInput" label="Customer Name" className="mb-3">
@@ -92,6 +91,7 @@ export const UpdateShuttle = ({ shuttle, company }) => {
                                 type="text"
                                 placeholder="Customer Name"
                                 ref={customerNameRef}
+                                defaultValue={shuttle.customerName}
                                 required
                             />
                             <Form.Control.Feedback type="invalid">
@@ -103,6 +103,7 @@ export const UpdateShuttle = ({ shuttle, company }) => {
                                 type="text"
                                 placeholder="Phone Number"
                                 ref={phoneNumberRef}
+                                defaultValue={shuttle.phoneNumber}
                                 required
                             />
                             <Form.Control.Feedback type="invalid">
@@ -114,6 +115,7 @@ export const UpdateShuttle = ({ shuttle, company }) => {
                                 type="text"
                                 placeholder="Address"
                                 ref={addressRef}
+                                defaultValue={shuttle.address}
                                 required
                             />
                             <Form.Control.Feedback type="invalid">
@@ -121,12 +123,19 @@ export const UpdateShuttle = ({ shuttle, company }) => {
                             </Form.Control.Feedback>
                         </FloatingLabel>
                         <FloatingLabel controlId="floatingInput" label="Driver" className="mb-3">
-                            <Form.Control
-                                type="text"
-                                placeholder="Driver"
+                            <Form.Select
+                                aria-label="Driver"
                                 ref={driverRef}
+                                defaultValue={shuttle.driver}
                                 required
-                            />
+                            >
+                                <option value="">Select Driver</option>
+                                {company?.drivers?.map((driver) => (
+                                    <option key={driver} value={driver}>
+                                        {driver}
+                                    </option>
+                                ))}
+                            </Form.Select>
                             <Form.Control.Feedback type="invalid">
                                 Please provide a valid driver.
                             </Form.Control.Feedback>
@@ -136,6 +145,7 @@ export const UpdateShuttle = ({ shuttle, company }) => {
                                 type="text"
                                 placeholder="Notes"
                                 ref={notesRef}
+                                defaultValue={shuttle.notes}
                             />
                             <Form.Control.Feedback type="invalid">
                                 Please provide a valid notes.
@@ -144,14 +154,37 @@ export const UpdateShuttle = ({ shuttle, company }) => {
                         <FloatingLabel controlId="floatingInput" label="Status" className="mb-3">
                             <FormSelect
                                 ref={statusRef}
+                                defaultValue={shuttle.status}
                                 required
                             >
-                                <option value="Started">Started</option>
-                                <option value="Completed">Completed</option>
-                                <option value="Hold">Hold</option>
+                                <option value="Confirmed">Confirmed</option>
+                                <option value="EnRoute">En Route</option>
+                                <option value="Completed">Completed</option> 
                             </FormSelect>
                             <Form.Control.Feedback type="invalid">
                                 Please provide a valid status.
+                            </Form.Control.Feedback>
+                        </FloatingLabel>
+                        <FloatingLabel controlId="floatingInput" label="TimeOut" className="mb-3">
+                            <Form.Control
+                                type="time"
+                                placeholder="TimeOut"
+                                ref={timeOutRef}
+                                defaultValue={shuttle.timeOut}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid TimeOut.
+                            </Form.Control.Feedback>
+                        </FloatingLabel>
+                        <FloatingLabel controlId="floatingInput" label="TimeIn" className="mb-3">
+                            <Form.Control
+                                type="time"
+                                placeholder="TimeIn"
+                                ref={timeInRef}
+                                defaultValue={shuttle.timeIn}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please provide a valid TimeIn.
                             </Form.Control.Feedback>
                         </FloatingLabel>
                         <Button type="submit" variant="primary">

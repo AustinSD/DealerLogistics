@@ -3,25 +3,22 @@ import { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import { ShuttleCollection } from '/imports/api/ShuttleCollection.js';
-import { CompanyCollection } from '/imports/api/CompanyCollection';
 import { useSubscribe, useTracker } from 'meteor/react-meteor-data';
 import { FormSelect } from 'react-bootstrap';
 
 export const NewShuttleForm = (props) => {
   const [validated, setValidated] = useState(false);
-  const [companyAdvisors, setCompanyAdvisors] = useState([]);
+
   const timeRef = React.useRef();
-  const asmRef = React.useRef();
   const customerNameRef = React.useRef();
   const phoneNumberRef = React.useRef();
   const addressRef = React.useRef();
-  const driverRef = React.useRef();
-  const notesRef = React.useRef();
-  const statusRef = React.useRef();
+  const driverRef = React.useRef("");
+  const notesRef = React.useRef("");
+  const statusRef = React.useRef("");
+  const directionRef = React.useRef();
+  
   const user = useTracker(() => Meteor.user());
-  const companyIsLoading = useSubscribe("company");
-  const company = useTracker(() => CompanyCollection.findOne({ company: user.profile.company }));
 
   const handleClose = () => {
     props.handleClose();
@@ -37,32 +34,19 @@ export const NewShuttleForm = (props) => {
 
     await Meteor.callAsync("shuttle.insert", {
       timeRequested: timeRef.current.value,
-      asm: asmRef.current.value,
       customerName: customerNameRef.current.value,
       phoneNumber: phoneNumberRef.current.value,
       address: addressRef.current.value,
       driver: driverRef.current.value,
       notes: notesRef.current.value,
       status: statusRef.current.value,
+      direction: directionRef.current.value,
       username: user.username,
       company: Meteor.user().profile.company,
     }).then(() => {
       handleClose();
     });
   };
-    const fetchAdvisors = async () => {
-        const users = await Meteor.callAsync("getCompanyAdvisors", user.profile.company);
-        setCompanyAdvisors(users);
-    };
-    useEffect(() => {
-        fetchAdvisors();
-    }, []);
-    const handleChange = (event) => {
-        setCompanyAdvisors(event.target.value);
-    };
-    const handleSelect = (event) => {
-        setCompanyAdvisors(event.target.value);
-    };
 
     return (
         <>
@@ -76,18 +60,6 @@ export const NewShuttleForm = (props) => {
                         />
                         <Form.Control.Feedback type="invalid">
                             Please provide a valid time requested.
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
-
-                    <FloatingLabel controlId="floatingInput" label="ASM" className="mb-3">
-                        <Form.Control
-                            type="text"
-                            placeholder="ASM"
-                            ref={asmRef}
-                            required
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            Please provide a valid ASM.
                         </Form.Control.Feedback>
                     </FloatingLabel>
 
@@ -127,42 +99,25 @@ export const NewShuttleForm = (props) => {
                         </Form.Control.Feedback>
                     </FloatingLabel>
 
-                    <FloatingLabel controlId="floatingInput" label="Driver" className="mb-3">
-                        <Form.Select aria-label="" ref={driverRef} required>
-                            {companyAdvisors.map((advisor) => (
-                                <option key={advisor._id} value={advisor.username}>
-                                    {
-                                        advisor.username
-                                    }
-                                </option>
-                            ))}
-                        </Form.Select>
-                        <Form.Control.Feedback type="invalid">
-                            Please provide a valid driver.
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
                     <FloatingLabel controlId="floatingInput" label="Notes" className="mb-3">
                         <Form.Control
                             type="text"
                             placeholder="Notes"
                             ref={notesRef}
-                            required
                         />
                         <Form.Control.Feedback type="invalid">
                             Please provide a valid notes.
                         </Form.Control.Feedback>
                     </FloatingLabel>
-                    <FloatingLabel controlId="floatingInput" label="Status" className="mb-3">
-                        <Form.Select aria-label="" ref={statusRef} required>
-                            <option value="Pending">Pending</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Cancelled">Cancelled</option>
+                    <FloatingLabel controlId='floatingInput' label='Direction' className='mb-3'>
+                        <Form.Select aria-label="" ref={directionRef} required>
+                            <option value="pickup">Pick Up</option>
+                            <option value="dropoff">Drop Off</option>
                         </Form.Select>
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid status.
+                            Please provide a valid direction.
                         </Form.Control.Feedback>
                     </FloatingLabel>
-
                     <Button type="submit" variant="primary">
                         Submit
                     </Button>

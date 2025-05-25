@@ -47,4 +47,16 @@ Meteor.methods({
       return;
     }
   },
+  "company.updateDriver"(companyName, newDrivers) {
+    try {
+      const result = CompanyCollection.updateAsync(
+                  { company: companyName },
+                  { $set: { drivers: newDrivers } }
+              );
+      return result;
+    } catch (error) {
+      throw new Meteor.Error("Error updating drivers", error.message);
+      return;
+    }
+  }
 });

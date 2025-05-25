@@ -40,8 +40,8 @@ export const CreateCompanyForm = (props) => {
         phone: phoneRef.current.value,
         admin: Meteor.user().emails[0].address,
         timestamp: new Date(),
-        //porters: [{name:"Johnny"}, {name:"Billy"}, {name:"Tommy"}]
-        porters: ["Johnny", "Billy", "Tommy"],
+        porters: [],
+        drivers: []
       }).then(async () => {
         console.log("Company added successfully");
         //handleClose();

@@ -7,23 +7,18 @@ import { UpdateShuttle } from "./UpdateShuttle";
 import { NewShuttleModal } from "./NewShuttleModal";
 import { useSubscribe, useTracker } from "meteor/react-meteor-data";
 
-export const ShuttleTable = () => {
+export const ShuttleTable = ({ direction }) => {
     const ready = useSubscribe("shuttle");
     const companyReady = useSubscribe("company");
 
     const shuttles = useTracker(() => {
         if (ready) {
-            return ShuttleCollection.find({ company: Meteor.user().profile.company }).fetch();
+            return ShuttleCollection.find({ company: Meteor.user().profile.company, direction: direction }).fetch();
         }
         return [];
     });
 
-    const company = useTracker(() => {
-        if (companyReady) {
-            return CompanyCollection.find({ company: Meteor.user().profile.company }).fetch();
-        }
-        return [];
-    });
+    const company = useTracker(() => CompanyCollection.find({ company: Meteor.user().profile.company }).fetch());
     const user = useTracker(() => Meteor.user());
 
     return (
@@ -64,7 +59,7 @@ export const ShuttleTable = () => {
                             <td>{shuttle?.timeOut}</td>
                             <td>{shuttle?.timeIn}</td>
                             <td>
-                                <UpdateShuttle key={shuttle._id} shuttle={shuttle} company={company} />
+                                <UpdateShuttle key={shuttle._id} shuttle={shuttle} company={company[0]} />
                             </td>
                         </tr>
                     ))}
