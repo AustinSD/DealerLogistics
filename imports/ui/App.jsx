@@ -28,8 +28,8 @@ import { CarsTable } from './Cars/CarsTable.jsx';
 import { CreateCompanyForm } from './Admin/CreateCompanyForm.jsx';
 import { AdminLayout } from './Admin/AdminLayout';
 import { AdminRoutes } from './AdminRoutes.jsx';
-import { Tasks } from './Tasks/Tasks';
-import { Shuttle } from './Shuttle/Shuttle';
+import { TasksTable } from './Tasks/TasksTable';
+import { ShuttleTable } from './Shuttle/ShuttleTable';
 
 export const App = () => {
   return (
@@ -38,8 +38,8 @@ export const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<CarsTable />} />
           <Route path="/cars" element={<CarsTable />} />
-          <Route path="/tasks" element={<Tasks />} />
-          <Route path="/shuttle" element={<Shuttle />} />
+          <Route path="/tasks" element={<TasksTable />} />
+          <Route path="/shuttle" element={<ShuttleTable />} />
           <Route element={<AdminRoutes />}>
             <Route path="/admin" element={<AdminLayout />} />
           </Route>

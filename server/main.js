@@ -8,6 +8,10 @@ import '../imports/api/carsMethods.js';
 import '../imports/api/UserPublications.js';
 import '../imports/api/companyMethods.js';
 import '../imports/api/CompanyPublications.js';
+import '../imports/api/shuttleMethods.js';
+import '../imports/api/ShuttlePublications.js';
+import '../imports/api/tasksMethods.js';
+import '../imports/api/TasksPublications.js';
 import './userMethods.js';
 
 const insertCar = (carInfo) =>
@@ -91,6 +95,7 @@ Meteor.startup(async () => {
       username: SEED_USERNAME_1,
       password: SEED_PASSWORD_2,
       email: SEED_USERNAME_1 + '@example.com',
+      profile: { company: 'AJ Company' }
     })
   }
   if (!(await Accounts.findUserByUsername(SEED_USERNAME_2))) {
@@ -105,6 +110,7 @@ Meteor.startup(async () => {
       username: SEED_USERNAME_3,
       password: SEED_PASSWORD_3,
       email: SEED_USERNAME_3 + '@example.com',
+      profile: { company: 'User Company' }
     });
   }
 

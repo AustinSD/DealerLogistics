@@ -34,7 +34,7 @@ export const NewCarForm = (props) => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -43,30 +43,24 @@ export const NewCarForm = (props) => {
 
     setValidated(true);
 
-    if (validated) {
-      await Meteor.callAsync("cars.insert", {
-        tagnum: tagRef.current.value,
-        asm: asmRef.current.value,
-        team: teamRef.current.value,
-        vehicle: vehicleRef.current.value,
-        color: colorRef.current.value,
-        vin: vinRef.current.value,
-        status: statusRef.current.value,
-        username: user.username,
-        notes: notesRef.current.value,
-        wash: washRef.current.value,
-        company: Meteor.user().profile.company,
-        timestamp: new Date()
-      }).then(() => {
-        console.log("Car added successfully");
-        handleClose();
-      });
+    await Meteor.callAsync("cars.insert", {
+      tagnum: tagRef.current.value,
+      asm: asmRef.current.value,
+      team: teamRef.current.value,
+      vehicle: vehicleRef.current.value,
+      color: colorRef.current.value,
+      vin: vinRef.current.value,
+      status: statusRef.current.value,
+      username: user.username,
+      notes: notesRef.current.value,
+      wash: washRef.current.value,
+      company: Meteor.user().profile.company,
+      timestamp: new Date()
+    }).then(() => {
       console.log("Car added successfully");
       handleClose();
-    } else {
-      console.log("Form is not valid");
-      return;
-    }
+    });
+
   };
 
   const fetchAdvisors = async () => {
@@ -95,6 +89,9 @@ export const NewCarForm = (props) => {
             size="sm"
             ref={tagRef}
           />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid tag number.
+          </Form.Control.Feedback>
         </FloatingLabel>
         <FloatingLabel controlId="formASM" label="ASM" className="mb-3">
           <Form.Select aria-label="ASM" size="sm" ref={asmRef} required>
@@ -105,6 +102,9 @@ export const NewCarForm = (props) => {
               </option>
             ))}
           </Form.Select>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid ASM.
+          </Form.Control.Feedback>
         </FloatingLabel>
         <FloatingLabel controlId="formTeam" label="Team" className="mb-3">
           <Form.Select aria-label="Team" size="sm" ref={teamRef} required>
@@ -119,6 +119,9 @@ export const NewCarForm = (props) => {
             <option value="Orange">Orange</option>
             <option value="Detail">Detail</option>
           </Form.Select>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid team.
+          </Form.Control.Feedback>
         </FloatingLabel>
         <FloatingLabel controlId="formVehicle" label="Vehicle" className="mb-3">
           <Form.Select size="sm" ref={vehicleRef} required>
@@ -129,6 +132,9 @@ export const NewCarForm = (props) => {
               </option>
             ))}
           </Form.Select>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid vehicle.
+          </Form.Control.Feedback>
         </FloatingLabel>
         <FloatingLabel controlId="formColor" label="Color" className="mb-3">
           <Form.Select size="sm" ref={colorRef} required>
@@ -150,6 +156,9 @@ export const NewCarForm = (props) => {
             <option value="Purple">Purple</option>
             <option value="Beige">Beige</option>
           </Form.Select>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid color.
+          </Form.Control.Feedback>
         </FloatingLabel>
         <FloatingLabel controlId="formVin" label="Vin" className="mb-3">
           <Form.Control
@@ -159,6 +168,9 @@ export const NewCarForm = (props) => {
             size="sm"
             ref={vinRef}
           />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid VIN.
+          </Form.Control.Feedback>
         </FloatingLabel>
         <FloatingLabel controlId="formStatus" label="Status" className="mb-3">
           <FormSelect size="sm" ref={statusRef} required>
@@ -167,6 +179,9 @@ export const NewCarForm = (props) => {
             <option value="Ready">Ready</option>
             <option value="Waiting">Waiting</option>
           </FormSelect>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid status.
+          </Form.Control.Feedback>
         </FloatingLabel>
         <FloatingLabel controlId="formNotes" label="Notes" className="mb-3">
           <Form.Control
@@ -177,6 +192,9 @@ export const NewCarForm = (props) => {
             size="sm"
             ref={notesRef}
           />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid notes.
+          </Form.Control.Feedback>
         </FloatingLabel>
         <FloatingLabel controlId="formWash" label="Wash" className="mb-3">
           <Form.Select size="sm" ref={washRef} required>
@@ -186,6 +204,9 @@ export const NewCarForm = (props) => {
             <option value="In Progress">In Progress</option>
             <option value="Already Washed">Already Washed</option>
           </Form.Select>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid wash.
+          </Form.Control.Feedback>
         </FloatingLabel>
         <div className="d-flex gap-2">
           <Button variant="secondary" onClick={handleClose}>

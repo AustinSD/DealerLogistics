@@ -29,7 +29,6 @@ export const CompanyProfile = (props) => {
 
     return (
         <Container>
-            <h1>Company Profile</h1>
             <Row>
                 <Col>
                     <div>
@@ -39,6 +38,7 @@ export const CompanyProfile = (props) => {
                         <p>Admin: {admin}</p>
                     </div>
                 </Col>
+                <Col></Col>
                 <Col>
                     <div>
                         <h3>Company Users</h3>

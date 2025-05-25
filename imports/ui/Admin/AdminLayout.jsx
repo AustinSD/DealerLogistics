@@ -15,7 +15,6 @@ export const AdminLayout = () => {
     <h1>Admin Page</h1>
     {user ? (
       <div>
-        <h2>Hello, {user.username}</h2>
         {user.profile && user.profile.company ? (
           <div>
             <CompanyProfile />

@@ -2,6 +2,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { LoginForm } from './LoginForm';
+import Header from './Header';
 import { useTracker } from 'meteor/react-meteor-data';
 
 function Layout() {
@@ -9,20 +10,10 @@ function Layout() {
 
   return (
     <div>
-      <header>
-        <h1>My App</h1>
-        <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-        </nav>
-      </header>
+      <Header />
       <main>
         {user ? (
           <div>
-            <h2>Hello, {user.username}</h2>
             <Outlet />
           </div>
         ) : (

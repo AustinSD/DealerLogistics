@@ -11,6 +11,7 @@ import { useSubscribe, useTracker } from 'meteor/react-meteor-data';
 import { FormSelect } from 'react-bootstrap';
 
 export const UpdateCar = ({ car }) => {
+  const [validated, setValidated] = useState(false);
   const [show, setShow] = useState(false);
 
   const tagRef = React.useRef();
@@ -43,6 +44,8 @@ export const UpdateCar = ({ car }) => {
       return
     }
 
+    setValidated(true);
+
     await Meteor.callAsync("cars.update", car._id, {
       tagnum: tagRef.current.value,
       asm: asmRef.current.value,
@@ -61,7 +64,7 @@ export const UpdateCar = ({ car }) => {
 
   return (
     <>
-      <Button id="updateCar" onClick={handleShow} variant="outline-light">Update Car</Button>
+      <Button id="updateCar" onClick={handleShow} variant="outline-dark">Update Car</Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -225,7 +228,7 @@ export const UpdateCar = ({ car }) => {
               label="Wash"
               className="mb-3"
             >
-              <Form.Select size="sm" ref={washRef} required>
+              <Form.Select size="sm" ref={washRef} defaultValue={car.wash} required>
                 <option></option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
