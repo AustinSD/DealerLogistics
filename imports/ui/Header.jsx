@@ -3,9 +3,14 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from "meteor/roles";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav'
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function Header() {
+  const logout = () => {
+    Meteor.logout();
+  };
+
   return (
     <Navbar className="bg-body-secondary" expand="lg">
       <Navbar.Brand href="/">Dealer Logistics</Navbar.Brand>
@@ -21,9 +26,12 @@ function Header() {
         </Nav>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
-            Signed in as: <a href="/login">{Meteor.user()?.username}</a>
-          </Navbar.Text>
+          <NavDropdown title={`Signed in as: ${Meteor.user()?.username}`} id="basic-nav-dropdown">
+            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+            <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+          </NavDropdown>
         </Navbar.Collapse>
       </Container>
     </Navbar>
