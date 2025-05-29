@@ -19,6 +19,8 @@ export const UpdateTask = ({ task, company }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const isAdvisor = Roles.userIsInRole(Meteor.user(), 'Advisors') || Roles.userIsInRole(Meteor.user(), 'admin');
+  
   const handleSave = async (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -69,6 +71,7 @@ export const UpdateTask = ({ task, company }) => {
                 defaultValue={task.time}
                 ref={timeRef}
                 required
+                {...(isAdvisor ? { disabled: false } : { disabled: true })}
               />
               <Form.Control.Feedback type="invalid">
                 Please provide a valid time.
@@ -81,6 +84,7 @@ export const UpdateTask = ({ task, company }) => {
                 defaultValue={task.asm}
                 ref={asmRef}
                 required
+                {...(isAdvisor ? { disabled: false } : { disabled: true })}
               />
               <Form.Control.Feedback type="invalid">
                 Please provide a valid ASM.
@@ -93,6 +97,7 @@ export const UpdateTask = ({ task, company }) => {
                 defaultValue={task.task}
                 ref={taskRef}
                 required
+                {...(isAdvisor ? { disabled: false } : { disabled: true })}
               />
               <Form.Control.Feedback type="invalid">
                 Please provide a valid task.
