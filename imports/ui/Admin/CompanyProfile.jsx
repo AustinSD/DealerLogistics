@@ -31,9 +31,10 @@ export const CompanyProfile = (props) => {
     return (
         <Container>
             <Row>
-                <Col>
+                <Col xs={2}>
                     <div>
-                        <h2>Company Name: {company}</h2>
+                        <h2>Company Name: </h2>
+                        <h4>{company}</h4>
                         <p>Address: {address}</p>
                         <p>Phone: {phone}</p>
                         <p>Admin: {admin}</p>

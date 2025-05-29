@@ -242,7 +242,7 @@ export const UpdateCar = ({ car }) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSave}>
+          <Button variant="info" onClick={handleSave}>
             Save Changes
           </Button>
         </Modal.Footer>

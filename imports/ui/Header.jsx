@@ -27,8 +27,8 @@ function Header() {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <NavDropdown title={`Signed in as: ${Meteor.user()?.username}`} id="basic-nav-dropdown">
-            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
+            {/* <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+            <NavDropdown.Item href="/settings">Settings</NavDropdown.Item> */}
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
           </NavDropdown>

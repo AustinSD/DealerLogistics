@@ -54,7 +54,7 @@ export const UpdateTask = ({ task, company }) => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="info" onClick={handleShow}>
         Update
       </Button>
 
@@ -141,7 +141,7 @@ export const UpdateTask = ({ task, company }) => {
               />
             </FloatingLabel>
 
-            <Button variant="primary" type="submit">
+            <Button variant="info" type="submit">
               Save Changes
             </Button>
             <Button variant="secondary" onClick={handleClose}>

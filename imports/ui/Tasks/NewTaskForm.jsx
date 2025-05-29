@@ -87,7 +87,7 @@ export const NewTaskForm = (props) => {
           </Form.Control.Feedback>
         </FloatingLabel>
 
-        <Button type="submit" variant="primary">
+        <Button type="submit" variant="info">
           Submit
         </Button>
         <Button variant="secondary" onClick={handleClose}>

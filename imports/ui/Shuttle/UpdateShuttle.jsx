@@ -64,7 +64,7 @@ export const UpdateShuttle = ({ shuttle, company }) => {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="info" onClick={handleShow}>
                 Update
             </Button>
 
@@ -187,7 +187,7 @@ export const UpdateShuttle = ({ shuttle, company }) => {
                                 Please provide a valid TimeIn.
                             </Form.Control.Feedback>
                         </FloatingLabel>
-                        <Button type="submit" variant="primary">
+                        <Button type="submit" variant="info">
                             Save Changes
                         </Button>
                         <Button variant="secondary" onClick={handleClose}>

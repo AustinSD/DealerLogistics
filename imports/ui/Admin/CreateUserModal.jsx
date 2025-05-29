@@ -14,7 +14,7 @@ export const CreateUserModal = (props) => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="info" onClick={handleShow}>
         Create User
       </Button>
 

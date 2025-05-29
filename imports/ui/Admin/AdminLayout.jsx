@@ -16,9 +16,7 @@ export const AdminLayout = () => {
     {user ? (
       <div>
         {user.profile && user.profile.company ? (
-          <div>
             <CompanyProfile />
-          </div>
         ) : (
           <div>
             <h3>No company information available</h3>

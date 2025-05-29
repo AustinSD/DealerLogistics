@@ -26,7 +26,7 @@ export const NewCarModal = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSave}>
+          <Button variant="info" onClick={handleSave}>
             Save Car
           </Button>
           <Button type="submit">Submit form</Button>
