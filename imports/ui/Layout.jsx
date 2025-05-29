@@ -3,6 +3,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { LoginForm } from './LoginForm';
 import Header from './Header';
+import ErrorPage from './ErrorPages';
 import { useTracker } from 'meteor/react-meteor-data';
 
 function Layout() {
@@ -14,7 +15,11 @@ function Layout() {
       <main>
         {user ? (
           <div>
-            <Outlet />
+            {user.profile && user.profile.company ? (
+              <Outlet />
+            ) : (
+              <ErrorPage />
+            )}
           </div>
         ) : (
           <div>
