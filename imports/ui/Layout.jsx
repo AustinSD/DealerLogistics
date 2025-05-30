@@ -1,13 +1,15 @@
 // Layout.js
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { LoginForm } from './LoginForm';
 import Header from './Header';
 import ErrorPage from './ErrorPages';
 import { useTracker } from 'meteor/react-meteor-data';
+import { AdminLayout } from './Admin/AdminLayout';
 
 function Layout() {
   const user = useTracker(() => Meteor.user());
+  const isAdmin = useTracker(() => Roles.userIsInRoleAsync(user, 'admin'));
 
   return (
     <div>
@@ -18,7 +20,7 @@ function Layout() {
             {user.profile && user.profile.company ? (
               <Outlet />
             ) : (
-              <ErrorPage />
+              isAdmin ? <AdminLayout /> : <ErrorPage />
             )}
           </div>
         ) : (

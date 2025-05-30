@@ -8,7 +8,8 @@ import { Roles } from "meteor/roles";
 
 export const AdminLayout = () => {
     const user = useTracker(() => Meteor.user());
-    const isAdmin = Roles.userIsInRoleAsync(user, 'Advisors')
+    const isAdmin = Roles.userIsInRoleAsync(user, 'admin')
+    console.log("isAdmin: ", isAdmin );
 
   return (
   <div>

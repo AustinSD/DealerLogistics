@@ -1,6 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import React from 'react';
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
@@ -16,6 +17,7 @@ export const CreateCompanyForm = (props) => {
   const companyRef = React.useRef();
   const addressRef = React.useRef();
   const phoneRef = React.useRef();
+  const navigate = useNavigate();
 
   const handleClose = (event) => {
     event.preventDefault();
@@ -44,6 +46,7 @@ export const CreateCompanyForm = (props) => {
         drivers: []
       }).then(async () => {
         console.log("Company added successfully");
+        navigate('/admin');
         //handleClose();
       });
     } else {
