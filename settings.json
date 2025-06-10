@@ -1,7 +1,7 @@
 {
   "galaxy.meteor.com": {
      "env": {
-       "MONGO_URL": "mongodb+srv://app_user:1qaz2wsx3edc4rfv@dealerlogistics.ydgd3rf.mongodb.net/?retryWrites=true&w=majority&appName=dealerlogistics",
+       "MONGO_URL": "mongodb+srv://app_user:1qaz2wsx3edc4rfv@dealerlogistics.ydgd3rf.mongodb.net/",
        "DEPLOY_HOSTNAME":"galaxy.meteor.com"
      }
    }
