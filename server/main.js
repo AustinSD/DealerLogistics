@@ -108,7 +108,7 @@ Meteor.startup(async () => {
   if (!(await Accounts.findUserByUsername(SEED_USERNAME_1))) {
     await Accounts.createUser({
       username: SEED_USERNAME_1,
-      password: SEED_PASSWORD_2,
+      password: SEED_PASSWORD_1,
       email: SEED_USERNAME_1 + '@example.com',
       profile: { company: 'AJ Company' }
     })
