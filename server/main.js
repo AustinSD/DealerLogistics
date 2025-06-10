@@ -26,7 +26,7 @@ const insertCar = (carInfo) =>
     status: carInfo.status,
     porter: carInfo.porter,
     username: carInfo.username,
-    wash: carInfo.wash,
+    wash: carInfo.wash, 
     company: carInfo.company,
   });
 
