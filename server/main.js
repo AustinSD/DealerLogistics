@@ -44,8 +44,8 @@ const SEED_PASSWORD_2 = 'password';
 const SEED_USERNAME_3 = 'advisor';
 const SEED_PASSWORD_3 = 'password';
 
-const SEED_USERNAME_4 = 'second_admin';
-const SEED_PASSWORD_4 = 'password';
+const SEED_USERNAME_4 = 'Bryan';
+const SEED_PASSWORD_4 = 'DaBears85';
 
 Meteor.startup(async () => {
   // if ((await CarsCollection.find().countAsync()) === 0) {
@@ -132,7 +132,7 @@ Meteor.startup(async () => {
       await Accounts.createUser({
         username: SEED_USERNAME_4,
         password: SEED_PASSWORD_4,
-        email: SEED_USERNAME_4 + '@example.com'
+        email: 'bpartipilo@toyotaofelcajon.com'
       });
     }
   }
