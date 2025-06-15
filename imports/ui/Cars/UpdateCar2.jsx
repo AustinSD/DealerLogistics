@@ -68,7 +68,7 @@ export const UpdateCar = ({ car }) => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Update Car</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>

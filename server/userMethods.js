@@ -75,7 +75,7 @@ Meteor.methods({
         const users = await Meteor.users.find({ "profile.company": company }).fetch();
         const promises = users.map(async (user) => {
           const role = await Roles.getRolesForUserAsync(user._id);
-          if (role.includes("Advisors")) {
+          if (role.includes("Advisors") || role.includes("admin")) {
             advisors.push(user);
           }
         });
