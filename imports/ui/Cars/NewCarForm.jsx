@@ -107,7 +107,7 @@ export const NewCarForm = (props) => {
           </Form.Control.Feedback>
         </FloatingLabel>
         <FloatingLabel controlId="formTeam" label="Team" className="mb-3">
-          <Form.Select aria-label="Team" size="sm" ref={teamRef} required>
+          <Form.Select aria-label="Team" size="sm" ref={teamRef} >
             <option></option>
             <option value="TXM">TXM</option>
             <option value="Silver">Silver</option>
@@ -137,7 +137,7 @@ export const NewCarForm = (props) => {
           </Form.Control.Feedback>
         </FloatingLabel>
         <FloatingLabel controlId="formColor" label="Color" className="mb-3">
-          <Form.Select size="sm" ref={colorRef} required>
+          <Form.Select size="sm" ref={colorRef} >
             <option></option>
             <option value="White">White</option>
             <option value="Black">Black</option>
@@ -162,7 +162,6 @@ export const NewCarForm = (props) => {
         </FloatingLabel>
         <FloatingLabel controlId="formVin" label="Vin" className="mb-3">
           <Form.Control
-            required
             type="string"
             placeholder="VIN"
             size="sm"
@@ -197,7 +196,7 @@ export const NewCarForm = (props) => {
           </Form.Control.Feedback>
         </FloatingLabel>
         <FloatingLabel controlId="formWash" label="Wash" className="mb-3">
-          <Form.Select size="sm" ref={washRef} required>
+          <Form.Select size="sm" ref={washRef} >
             <option></option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
