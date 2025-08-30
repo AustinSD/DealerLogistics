@@ -12,9 +12,9 @@ export const CarsTable = () => {
     const cars = useTracker(() => CarsCollection.find({ company: Meteor.user().profile.company }).fetch());
 
     const user = useTracker(() => Meteor.user());
-    console.log(user);
-    console.log(Roles.userIsInRole(user, 'admin'));
-    console.log(Roles.getRolesForUser(user));
+    // console.log(user);
+    // console.log(Roles.userIsInRole(user, 'admin'));
+    // console.log(Roles.getRolesForUser(user));
 
     const getColor = (status) => {
         switch (status) {
@@ -49,6 +49,7 @@ export const CarsTable = () => {
                         <th>Porter</th>
                         <th>Username</th>
                         <th>Wash</th>
+                        <th>Created</th>
                         <th>Update</th>
                     </tr>
                 </thead>
@@ -66,6 +67,7 @@ export const CarsTable = () => {
                             <td>{car.porter}</td>
                             <td>{car.username}</td>
                             <td>{car.wash}</td>
+                            <td>{car.timestamp.toLocaleString()}</td> 
                             <td>
                                 <UpdateCar key={car._id} car={car} />
                             </td>
