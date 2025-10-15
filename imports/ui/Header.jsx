@@ -16,20 +16,15 @@ function Header() {
   const logout = () => {
     Meteor.logout();
   };
-
-  var numCars = useTracker(() => CarsCollection.find({ company: Meteor.user().profile.company }).fetch());
-  var numShuttles = useTracker(() => ShuttleCollection.find({ company: Meteor.user().profile.company }).fetch());
-  var numTasks = useTracker(() => TasksCollection.find({ company: Meteor.user().profile.company }).fetch());
-
   return (
     <Navbar className="bg-body-secondary" expand="lg">
       <Navbar.Brand href="/">Dealer Logistics</Navbar.Brand>
       <Container>
 
         <Nav className="me-auto">
-          <Nav.Link href="/cars">Cars <Badge bg="info">{numCars.length}</Badge></Nav.Link>
-          <Nav.Link href="/shuttle">Shuttle <Badge bg="info">{numShuttles.length}</Badge></Nav.Link>
-          <Nav.Link href="/tasks">Tasks <Badge bg="info">{numTasks.length}</Badge></Nav.Link>
+          <Nav.Link href="/cars">Cars</Nav.Link>
+          <Nav.Link href="/shuttle">Shuttle</Nav.Link>
+          <Nav.Link href="/tasks">Tasks</Nav.Link>
           {Roles.userIsInRole(Meteor.user(), 'admin') ? (
             <Nav.Link href="/admin">Admin</Nav.Link>
           ) : null}
